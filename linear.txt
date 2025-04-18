@@ -1,0 +1,246 @@
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    >
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        >
+
+        <TextView
+            android:id="@+id/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text=""
+            android:textSize="40dp"
+            android:gravity="right"
+            />
+
+        <TableRow android:padding="2dp">
+            <Button
+                android:id="@+id/modulo"
+                android:text="%"/>
+            <Button
+                android:id="@+id/ce"
+                android:text="CE"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/ac"
+                android:text="AC"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/clear"
+                android:text="Clear"
+                android:layout_marginLeft="10dp"/>
+        </TableRow>
+
+        <TableRow android:padding="2dp">
+            <Button
+                android:id="@+id/one"
+                android:text="1"/>
+            <Button
+                android:id="@+id/two"
+                android:text="2"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/three"
+                android:text="3"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/add"
+                android:text="+"
+                android:layout_marginLeft="10dp"/>
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/four"
+                android:text="4"/>
+            <Button
+                android:id="@+id/five"
+                android:text="5"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/six"
+                android:text="6"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/sub"
+                android:text="-"
+                android:layout_marginLeft="10dp"/>
+        </TableRow>
+
+        <TableRow android:padding="2dp">
+            <Button
+                android:id="@+id/seven"
+                android:text="7"/>
+            <Button
+                android:id="@+id/eight"
+                android:text="8"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/nine"
+                android:text="9"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/mul"
+                android:text="X"
+                android:layout_marginLeft="10dp"/>
+        </TableRow>
+
+        <TableRow android:padding="2dp">
+            <Button
+                android:id="@+id/zero"
+                android:text="0"/>
+            <Button
+                android:id="@+id/point"
+                android:text="."
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/equal"
+                android:text="="
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/div"
+                android:text="/"
+                android:layout_marginLeft="10dp"/>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
+
+
+
+
+
+MainActivity.kt
+package com.example.demo
+
+import android.content.Intent
+import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_calcu.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.add
+import kotlinx.android.synthetic.main.activity_main.clear
+import kotlinx.android.synthetic.main.activity_main.div
+import kotlinx.android.synthetic.main.activity_main.eight
+import kotlinx.android.synthetic.main.activity_main.equal
+import kotlinx.android.synthetic.main.activity_main.five
+import kotlinx.android.synthetic.main.activity_main.four
+import kotlinx.android.synthetic.main.activity_main.modulo
+import kotlinx.android.synthetic.main.activity_main.mul
+import kotlinx.android.synthetic.main.activity_main.nine
+import kotlinx.android.synthetic.main.activity_main.one
+import kotlinx.android.synthetic.main.activity_main.point
+import kotlinx.android.synthetic.main.activity_main.res
+import kotlinx.android.synthetic.main.activity_main.seven
+import kotlinx.android.synthetic.main.activity_main.six
+import kotlinx.android.synthetic.main.activity_main.sub
+import kotlinx.android.synthetic.main.activity_main.three
+import kotlinx.android.synthetic.main.activity_main.two
+import kotlinx.android.synthetic.main.activity_main.zero
+import kotlinx.android.synthetic.main.activity_second_page.*
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        var lhs: Double = 0.0
+        var rhs: Double = 0.0
+        var op: Int = 0
+
+        one.setOnClickListener {
+            res.append(one.text.toString())
+        }
+        two.setOnClickListener {
+            res.append(two.text.toString())
+        }
+        three.setOnClickListener {
+            res.append(three.text.toString())
+        }
+        four.setOnClickListener {
+            res.append(four.text.toString())
+        }
+        five.setOnClickListener {
+            res.append(five.text.toString())
+        }
+        six.setOnClickListener {
+            res.append(six.text.toString())
+        }
+        seven.setOnClickListener {
+            res.append(seven.text.toString())
+        }
+        eight.setOnClickListener {
+            res.append(eight.text.toString())
+        }
+        nine.setOnClickListener {
+            nine.append(one.text.toString())
+        }
+        zero.setOnClickListener {
+            res.append(zero.text.toString())
+        }
+        point.setOnClickListener {
+            res.append(point.text.toString())
+        }
+        clear.setOnClickListener {
+            lhs = 0.0
+            rhs = 0.0
+            res.text = ""
+        }
+        add.setOnClickListener {
+            lhs = res.text.toString().toDouble()
+            res.text = ""
+            op = 1
+        }
+        sub.setOnClickListener {
+            lhs = res.text.toString().toDouble()
+            res.text = ""
+            op = 2
+        }
+        mul.setOnClickListener {
+            lhs = res.text.toString().toDouble()
+            res.text = ""
+            op = 3
+        }
+        modulo.setOnClickListener {
+            lhs = res.text.toString().toDouble()
+            res.text = ""
+            op = 5
+        }
+        div.setOnClickListener {
+            lhs = res.text.toString().toDouble()
+            res.text = ""
+            op = 4
+        }
+        equal.setOnClickListener {
+            var r: Double = 0.0
+            rhs = res.text.toString().toDouble()
+            if (op == 1) {
+                r = lhs + rhs
+                res.text = "$r"
+            } else if (op == 2) {
+                r = lhs - rhs
+                res.text = "$r"
+            } else if (op == 3) {
+                r = lhs * rhs
+                res.text = "$r"
+            } else if (op == 4) {
+                r = lhs / rhs
+                res.text = "$r"
+            } else if (op == 5) {
+                r = lhs % rhs
+                res.text = "$r"
+            }
+        }
+    }
+}
